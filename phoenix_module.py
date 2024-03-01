@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 from PIL import Image
 import io
 from pydantic import BaseModel
-# from ultralytics import YOLO
+from ultralytics import YOLO
 
 
 
