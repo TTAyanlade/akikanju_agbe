@@ -25,6 +25,8 @@ class ImageUpload(BaseModel):
 async def predict(image: UploadFile = File(...)):
 
     contents = await image.read()
+
+    # contents = await image.read()
     # img = Image.open(io.BytesIO(contents)).convert('RGB')
     # 'https://ultralytics.com/images/bus.jpg'
 
