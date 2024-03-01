@@ -79,7 +79,8 @@ async def root():
     return {'message': 'Welcome to my FastAPI phoenix-ag-app!'}
 
 # Load pre-trained ResNet50 model
-model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
+# model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
+model = resnet50(weights=None)
 
 
 # model = resnet50(weights=None)
