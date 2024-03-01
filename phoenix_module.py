@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 from PIL import Image
 import io
 from pydantic import BaseModel
-from ultralytics import YOLO
+# from ultralytics import YOLO
 
 
 
@@ -14,7 +14,7 @@ app = FastAPI()
 @app.get('/')
 async def root():
     return {'message': 'Welcome to my FastAPI phoenix-ag-app!'}
-model = YOLO('./model_weights/best.pt') 
+# model = YOLO('./model_weights/best.pt') 
 
 
 class ImageUpload(BaseModel):
@@ -30,7 +30,7 @@ async def predict(image: UploadFile = File(...)):
     # img = Image.open(io.BytesIO(contents)).convert('RGB')
     # 'https://ultralytics.com/images/bus.jpg'
 
-    results = model('https://ultralytics.com/images/bus.jpg')
+    # results = model('https://ultralytics.com/images/bus.jpg')
 
 
     return {'class': "results"}
