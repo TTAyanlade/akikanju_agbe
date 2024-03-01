@@ -65,10 +65,10 @@
 from fastapi import FastAPI, File, UploadFile
 from PIL import Image
 import io
-import torch
-import torchvision.transforms as transforms
-from torchvision.models import resnet50, ResNet50_Weights
-from torchvision import models
+# import torch
+# import torchvision.transforms as transforms
+# from torchvision.models import resnet50, ResNet50_Weights
+# from torchvision import models
 from pydantic import BaseModel
 
 # Creating FastAPI instance
@@ -80,21 +80,21 @@ async def root():
 
 # Load pre-trained ResNet50 model
 # model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
-model = resnet50(weights=None)
+# model = resnet50(weights=None)
 
 
 # model = resnet50(weights=None)
 # weights_path = "resnet50_weights.pth"  # Path to your .pth file
 # model.load_state_dict(torch.load(weights_path))
-model.eval()
+# model.eval()
 
-# Define transformation to preprocess the image
-preprocess = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-])
+# # Define transformation to preprocess the image
+# preprocess = transforms.Compose([
+#     transforms.Resize(256),
+#     transforms.CenterCrop(224),
+#     transforms.ToTensor(),
+#     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+# ])
 
 # Define class to handle image upload
 class ImageUpload(BaseModel):
@@ -107,16 +107,18 @@ async def predict(image: UploadFile = File(...)):
     contents = await image.read()
     # Open image using PIL
     img = Image.open(io.BytesIO(contents)).convert('RGB')
+
+    return {'class': 'test'}
     # Preprocess image
-    img = preprocess(img)
-    img = torch.unsqueeze(img, 0)  # Add batch dimension
-    # Make prediction
-    with torch.no_grad():
-        outputs = model(img)
-    # Get predicted class label
-    _, predicted_idx = torch.max(outputs, 1)
-    # Load labels mapping
-    with open("imagenet_classes.txt") as f:
-        classes = [line.strip() for line in f.readlines()]
-    # Return the result
-    return {'class': classes[predicted_idx.item()]}
+    # img = preprocess(img)
+    # img = torch.unsqueeze(img, 0)  # Add batch dimension
+    # # Make prediction
+    # with torch.no_grad():
+    #     outputs = model(img)
+    # # Get predicted class label
+    # _, predicted_idx = torch.max(outputs, 1)
+    # # Load labels mapping
+    # with open("imagenet_classes.txt") as f:
+    #     classes = [line.strip() for line in f.readlines()]
+    # # Return the result
+    # return {'class': classes[predicted_idx.item()]}
