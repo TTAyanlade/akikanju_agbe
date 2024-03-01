@@ -31,5 +31,5 @@ async def predict(image: UploadFile = File(...)):
     results = model('https://ultralytics.com/images/bus.jpg')
 
 
-    return {'class': results}
+    return {'class': "results"}
 
