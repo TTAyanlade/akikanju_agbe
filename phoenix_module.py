@@ -6,7 +6,7 @@ from ultralytics import YOLO
 
 
 
-
+# opencv-python-headless==3.4.18.65
 
 # Creating FastAPI instance
 app = FastAPI()
