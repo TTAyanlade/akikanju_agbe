@@ -79,7 +79,12 @@ async def root():
     return {'message': 'Welcome to my FastAPI phoenix-ag-app!'}
 
 # Load pre-trained ResNet50 model
-model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
+# model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
+
+
+model = resnet50(weights=None)
+weights_path = "resnet50_weights.pth"  # Path to your .pth file
+model.load_state_dict(torch.load(weights_path))
 model.eval()
 
 # Define transformation to preprocess the image
